@@ -43,7 +43,6 @@
         <br><br><br>
 
         {% for weather in weather_data %}
-
         <div class="card  w-25 m-2 " style=" float: left;  ">
             <div class="card-image ml-2">
                <h2>
@@ -57,28 +56,18 @@
             <div class="card_body ml-5">
                 <p>{{ weather.description }}</p>
                 <p> {{ weather.temperature }} <sup> 0 </sup> Celcius </p>
-
-                
-                 {% for city in cities %}
-                 
-                 <form action="{{ url_for('delete_city', city_id=city.id) }}" method="POST">
-                    <input type="submit" value="Delete entry" />
-               </form>
-
-
-                {% endfor %}
-                ******************
-                
-                
-               
-               
-                
-
-            </div>
-            
-            
+            </div>    
         </div>
-        
+        {% endfor %}
+
+        {% for city in cities %}
+
+        <div class="card-image ml-2">
+            <form action="{{ url_for('delete_city', city_id=city.id) }}" method="POST">
+                <input type="submit" value="Delete entry" />
+            </form>
+           
+        </div>
 
         {% endfor %}
 
