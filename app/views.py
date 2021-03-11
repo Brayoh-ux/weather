@@ -1,4 +1,4 @@
-from flask import render_template, request, flash, url_for
+from flask import render_template, flash, url_for, redirect, request
 from app import app, db
 import requests
 from app.models import City
@@ -73,17 +73,17 @@ def save():
     places = City.query.order_by(City.date_posted.desc())\
         .paginate(page = page, per_page=3)
 
-    return render_template('save.html', weather_data = weather_data, places = places)
+    return render_template('save.html', weather_data = weather_data, cities = places)
 
 
 @app.route('/save/delete_city/<int:city_id>', methods = ['GET', 'POST'])
 def delete_city(city_id):
-    if method == 'POST':
-        cities = City.query.get_or_404(city_id)
+    if request.method == 'POST':
+        city = City.query.get_or_404(city_id)
         # if post.author != current_user:
         #     abort(403)
-        if cities:
-            db.session.delete(cities)
+        if city:
+            db.session.delete(city)
             db.session.commit()
 
     flash('City deleted', 'success')

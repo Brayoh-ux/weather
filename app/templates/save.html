@@ -61,8 +61,7 @@
                 
                  {% for city in cities %}
                  
-                 <form action="{{ url_for('delete_city', id=city.id) }}" method="POST">
-                    <input type="hidden" name="_method" value="DELETE" />
+                 <form action="{{ url_for('delete_city', city_id=city.id) }}" method="POST">
                     <input type="submit" value="Delete entry" />
                </form>
 
