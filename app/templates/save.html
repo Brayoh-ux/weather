@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                    {% for category, message in messages %}
+
+                    <div class="alert alert-{{ category }} ">
+                        {{ message }}
+                    </div>
+
+                    {% endfor %}
+                </ul>
+
+            {% endif %}
+
+        {% endwith %}
+       {% block nav %}
+
+            {% include 'base.html' %}
+
+        {% endblock %}
+        <br>
+
+        <h1>Search And Save</h1>
+
+        <br><br>
+        <form action="" method="POST" >
+            <input type="text" name="city" placeholder="Cityname">
+            <button class="btn btn-info">Check</button>
+        </form>
+        <br><br><br>
+
+        {% for weather in weather_data %}
+
+        <div class="card  w-25 m-2 " style=" float: left;  ">
+            <div class="card-image ml-2">
+               <h2>
+                <img src="http://openweathermap.org/img/w/{{weather.icon}}.png" alt="">
+         
+                {{ weather.city}}
+               </h2>
+           
+            </div>
+            
+            <div class="card_body ml-5">
+                <p>{{ weather.description }}</p>
+                <p> {{ weather.temperature }} <sup> 0 </sup> Celcius </p>
+
+                
+                 {% for city in cities %}
+                 
+                 <form action="{{ url_for('delete_city', id=city.id) }}" method="POST">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <input type="submit" value="Delete entry" />
+               </form>
+
+
+                {% endfor %}
+                ******************
+                
+                
+               
+               
+                
+
+            </div>
+            
+            
+        </div>
+        
+
+        {% endfor %}
+
+        <!-- {% for page_num in places.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2,) %}
+
+        {% if page_num %}
+
+            {% if page_num == places.page ==page_num %}
+
+            <a href=" {{ url_for('index', page= page_num) }} " class="btn btn-info"> {{ page_num }} </a>
+            {% else %}
+
+            <a href=" {{ url_for('index', page= page_num) }} " class="btn btn-outline-info"> {{ page_num }} </a>
+            {% endif %}
+
+        {% else %}
+        ....
+        {% endif %}
+
+        {% endfor %} -->
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        
+    </style>
+</body>
+</html>
+
+
+<!-- flashed messages -->
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        {% block nav %}
+
+        {% include 'base.html' %}
+
+    {% endblock %}
+        <br><br>
+        <form action="" method="POST" >
+            <input type="text" name="city" placeholder="Cityname">
+            <button class="btn btn-info">Check</button>
+        </form>
+        
+        {% for weather in weather_data %}
+        <br><br>
+
+        <div class="card col w-50 ">
+            <div class="card-image ml-2">
+               <h2>
+                <img src="http://openweathermap.org/img/w/{{weather.icon}}.png" alt="">
+         
+                {{ weather.city}}
+               </h2>
+           
+            </div>
+            
+            <div class="card_body ml-5">
+                <p>{{ weather.description }}</p>
+                <p> {{ weather.temperature }} <sup> 0 </sup> Celcius </p>
+            </div>
+            
+            
+        </div>
+        <br><br><br>
+
+        {% endfor %}
+    </div>  
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+   
